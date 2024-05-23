@@ -45,7 +45,11 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-
+    //測試
+    // private void OnTriggerStay2D(Collider2D other)
+    // {
+    //     Debug.Log(other.name);
+    // }
     public void Move()
     {
         rb.velocity = new Vector2(inputDirection.x * speed * Time.deltaTime, rb.velocity.y);

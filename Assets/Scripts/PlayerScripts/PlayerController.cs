@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float jumpForce;
 
+    public float hurtForce;
+    public bool isHurt;
+    public bool isDead;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,7 +48,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isHurt)
+        {
+            Move();
+        }
     }
     //測試
     // private void OnTriggerStay2D(Collider2D other)
@@ -72,5 +80,19 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             Debug.Log("jump");
         }
+    }
+
+    public void GetHurt(Transform attacker)
+    {
+        isHurt = true;
+        rb.velocity = Vector2.zero;
+        Vector2 dir = new Vector2((transform.position.x - attacker.position.x), 0).normalized;
+        rb.AddForce(dir * hurtForce, ForceMode2D.Impulse);
+    }
+
+    public void PlayerDead()
+    {
+        isDead = true;
+        inputControl.Gameplay.Disable();
     }
 }

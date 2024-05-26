@@ -574,6 +574,9 @@ MonoBehaviour:
   inputDirection: {x: 0, y: 0}
   speed: 300
   jumpForce: 15
+  hurtForce: 2
+  isHurt: 0
+  isDead: 0
 --- !u!114 &1054483816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,10 +654,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffa219a9b20f774ebe832674515d966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 6
   currentHealth: 0
   invulnerableDuration: 2
   invulnerable: 0
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1054483817}
+        m_TargetAssemblyTypeName: PlayerAnimation, Assembly-CSharp
+        m_MethodName: PlayHurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1054483815}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: GetHurt
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1054483815}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1243731513
 GameObject:
   m_ObjectHideFlags: 0
@@ -22076,7 +22121,7 @@ Transform:
   m_GameObject: {fileID: 1321975992}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: -1, z: 0}
+  m_LocalPosition: {x: 4.34, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22205,6 +22250,12 @@ MonoBehaviour:
   currentHealth: 0
   invulnerableDuration: 0
   invulnerable: 0
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1321975999
 MonoBehaviour:
   m_ObjectHideFlags: 0

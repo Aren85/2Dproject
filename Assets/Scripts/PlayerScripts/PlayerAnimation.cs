@@ -29,6 +29,8 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("velocityY", rb.velocity.y);
         anim.SetBool("isGround", physicsCheck.isGround);
         anim.SetBool("isDead", playerController.isDead);
+        anim.SetBool("isRun", playerController.isRun);
+        anim.SetBool("isJump", playerController.isJump);
     }
 
     public void PlayHurt()

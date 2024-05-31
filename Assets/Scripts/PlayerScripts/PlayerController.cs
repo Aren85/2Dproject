@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
 
     public float hurtForce;
+    [Header("狀態顯示")]
     public bool isHurt;
     public bool isDead;
+    public bool isRun;
+    public bool isJump;
 
 
     private void Awake()
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         inputDirection = inputControl.Gameplay.Move.ReadValue<Vector2>();
+        CheckMove();
+        CheckJumpKeyIsPressed();
     }
 
     private void FixedUpdate()
@@ -73,12 +78,37 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(faceDir, 1, 1);
     }
 
+    private void CheckMove()
+    {
+        if (inputControl.Gameplay.Move.IsPressed())
+        {
+            isRun = true;
+        }
+        else
+        {
+            isRun = false;
+        }
+
+    }
+
+
     private void Jump(InputAction.CallbackContext context)
     {
         if (physicsCheck.isGround)
         {
             rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
             Debug.Log("jump");
+        }
+    }
+    private void CheckJumpKeyIsPressed()
+    {
+        if (inputControl.Gameplay.Jump.IsPressed())
+        {
+            isJump = true;
+        }
+        else
+        {
+            isJump = false;
         }
     }
 
